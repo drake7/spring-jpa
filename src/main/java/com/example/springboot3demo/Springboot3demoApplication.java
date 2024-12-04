@@ -23,7 +23,8 @@ public class Springboot3demoApplication {
 		return runner->{
 	//			createStudent(studentDAO);
 	//		System.out.println(readStudent(studentDAO));
-			System.out.println(readStudentByLastName(studentDAO));
+	//		System.out.println(readStudentByLastName(studentDAO));
+			updateStudent(studentDAO);
 		};
 	}
 
@@ -51,6 +52,21 @@ public class Springboot3demoApplication {
 		System.out.println(tempStudent.getId());
 
 		studentDAO.findById(tempStudent.getId());
+	}
+
+	private void updateStudent(StudentDAO studentDAO){
+
+		System.out.println("Updates for the code");
+		Student tempStudent = new Student("Paul","Doe","PaulDoe@gmail.com");
+		System.out.println("Saving the student");
+		studentDAO.save(tempStudent);
+		System.out.println("Id of saved student");
+		System.out.println(tempStudent.getId());
+		System.out.println("Update something in the student");
+		tempStudent.setEmail("deepak.kumar7v@gmai.com");
+		studentDAO.updateStudent(tempStudent);
+
+
 	}
 }
 
