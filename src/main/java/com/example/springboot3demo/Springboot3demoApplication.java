@@ -24,8 +24,14 @@ public class Springboot3demoApplication {
 	//			createStudent(studentDAO);
 	//		System.out.println(readStudent(studentDAO));
 	//		System.out.println(readStudentByLastName(studentDAO));
-			updateStudent(studentDAO);
+	//		updateStudent(studentDAO);
+			
+			deleteStudent(studentDAO);
 		};
+	}
+
+	private void deleteStudent(StudentDAO studentDAO) {
+		studentDAO.deleteStudent(13);
 	}
 
 	private Student readStudent(StudentDAO studentDAO) {
