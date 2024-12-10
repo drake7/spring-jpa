@@ -1,6 +1,9 @@
 package com.example.springboot3demo;
 
+import com.example.springboot3demo.dao.AppDao;
 import com.example.springboot3demo.dao.StudentDAO;
+import com.example.springboot3demo.entity.Instructor;
+import com.example.springboot3demo.entity.InstructorDetail;
 import com.example.springboot3demo.entity.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +19,11 @@ public class Springboot3demoApplication {
 		SpringApplication.run(Springboot3demoApplication.class, args);
 	}
 
+
+	/*
+	This code demonstrate how to use the entity manager with hibernate to run the CRUD operations
 	@Bean
+
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO)
 	{
 
@@ -25,9 +32,50 @@ public class Springboot3demoApplication {
 	//		System.out.println(readStudent(studentDAO));
 	//		System.out.println(readStudentByLastName(studentDAO));
 	//		updateStudent(studentDAO);
-			
-			deleteStudent(studentDAO);
+	//		deleteStudent(studentDAO);
+
+			System.out.println("Application started");
 		};
+
+	}*/
+
+	@Bean
+	public CommandLineRunner commandLineRunner(AppDao appDao)
+	{
+
+		return runner->{
+			System.out.println("Application started");
+		//	createInstructor(appDao);
+		//	findInstructorById(appDao);
+			findInstructorDetailById(appDao);
+		};
+
+	}
+
+	private void findInstructorDetailById(AppDao appDao) {
+		int id = 1;
+		//check the whole functionality to learn how we found instructor details from the OnetoOne
+		//bi directional mapping
+		InstructorDetail insturctorDetail = appDao.findInstructorDetailById(id);
+		System.out.println(insturctorDetail);
+
+	}
+
+	private void findInstructorById(AppDao appDao) {
+
+		Instructor ins = appDao.findInstructorById(1);
+		System.out.println(ins);
+	}
+
+	private void createInstructor(AppDao appDao) {
+
+		Instructor instructor = new Instructor("Deepak","kumar","deepak.kumar7v@gmail.com");
+		InstructorDetail instructorDetail = new InstructorDetail("codeHub","codehub");
+
+		instructor.setInstructorDetail(instructorDetail);
+
+		System.out.println("Saving instructor:" + instructor);
+		appDao.save(instructor);
 	}
 
 	private void deleteStudent(StudentDAO studentDAO) {
